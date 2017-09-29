@@ -64,7 +64,8 @@
     \usepackage{booktabs}  % table support for pandoc > 1.12.2
     \usepackage[normalem]{ulem} % ulem is needed to support strikethroughs (\sout)
                                 % normalem makes italics be italics, not underlines
-    
+    \newcommand{\HRule}{\rule{\linewidth}{0.25mm}}
+    \usepackage{setspace}
 
     
     
@@ -263,30 +264,31 @@
       }
     % Slightly bigger margins than the latex defaults
     
-    \geometry{verbose,tmargin=1in,bmargin=1in,lmargin=1in,rmargin=1in}
+    \geometry{verbose,tmargin=.75in,bmargin=.5in,lmargin=.75in,rmargin=.5in}
     
-    \usepackage{setspace}
-    \usepackage[nopar]{lipsum} % for dummy text
-    \newcommand{\HRule}{\rule{\linewidth}{0.25mm}}
+    
 
     \begin{document}
     
     
-   	\input{../title.tex}
+    \input{../title.tex}
+    
+    
 
+    
     \section{Conceptual}\label{conceptual}
 
     \subsection{Statistical Significance}\label{statistical-significance}
 
 Given the statistical information in the table provided, several
-conclusions can be drawn. The intercept, TV,\\
-and radio are all statistically significant. This is indicated by the
-especially low p-value. This translates to the impact that each category
-of ads have on the gross sales of the company. TV and radio
-advertisements have a statistically significant impact on sales. I am
-unable to make that same conclusion with newspaper. \\
-Null Hypothesis $H_0$ = There is no correlation between advertisements run on
-various mediums (TV, Radio, Newspaper) and the gross sales of a company. 
+conclusions can be drawn. The intercept, TV,\textbackslash{} and radio
+are all statistically significant. This is indicated by the especially
+low p-value. This translates to the impact that each category of ads
+have on the gross sales of the company. TV and radio advertisements have
+a statistically significant impact on sales. I am unable to make that
+same conclusion with newspaper. \textbackslash{} Null Hypothesis \(H_0\)
+= There is no correlation between advertisements run on various mediums
+(TV, Radio, Newspaper) and the gross sales of a company.
 
 \subsubsection{Intercept}\label{intercept}
 
@@ -298,12 +300,13 @@ the data.
 
 \subsubsection{TV}\label{tv}
 
-TV advertisements have a definitive impact on gross sales. The likelihood
-that this scenario of sales would not occur naturally without the
-addition of TV advertising dollars. If the spend in other mediums are
-fixed, then for every addition dollar spent on TV advertising will
+TV advertisements have a definitive impact on gross sales. The
+likelihood that this scenario of sales would not occur naturally without
+the addition of TV advertising dollars. If the spend in other mediums
+are fixed, then for every addition dollar spent on TV advertising will
 increase gross sales by 0.046. This is unlikely to occur naturally
-(extremely low P-value), therefore, TV spend has an impact on gross sales.
+(extremely low P-value), therefore, TV spend has an impact on gross
+sales.
 
 \subsubsection{Radio}\label{radio}
 
@@ -330,43 +333,40 @@ maximize the return. Newspaper has not statistically increased sales;
 therefore, I would not continue spending money on this form of
 advertising.
 
-    \subsection{Least Squares Analysis***}\label{least-squares-analysis}
+    \subsection{Least Squares Analysis}\label{least-squares-analysis}
 
-    \subsubsection{Which is true}\label{truefalse}
+    \subsubsection{Which is True?}\label{which-is-true}
 
-  3 is TRUE. As a result of the increasing value of GPA (1.0-4.0), a fixed
-  GPA of greater than 3.5 will compensate for the additional salary from
-  being a women. A salary of above 3.5 combined with the positive
-  correlation of being male, guys will tend to make more than females.
-  This is compounded by the fact that gender is binary. The additional
-  salary is only added once to the total; in the case of GPAs, a 1 point
-  increase from 2.0 to 3.0 will increase salary by 20k, then again as
-  the student moves from 3.0 to 4.0.
-
+3 is TRUE. As a result of the increasing value of GPA (1.0-4.0), a fixed
+GPA of greater than 3.5 will compensate for the additional salary from
+being a women. A salary of above 3.5 combined with the positive
+correlation of being male, guys will tend to make more than females.
+This is compounded by the fact that gender is binary. The additional
+salary is only added once to the total; in the case of GPAs, a 1 point
+increase from 2.0 to 3.0 will increase salary by 20k, then again as the
+student moves from 3.0 to 4.0.
 
     \subsubsection{Proof}\label{proof}
 
 \begin{align}
 E(salary) =& 50 + 20X_1 + 0.07X_2 + 35X_3 + 0.01X_4 -10X_5\\
-=& 50 + 20(GPA) + 0.07(IQ) + 35(Gender) + 0.01(Corr(GPA, IQ)) - 10(Corr(GPA, Gender))\\
+=& 50 + 20(GPA) + 0.07(IQ) + 35(Gender) + 0.01(GPA*IQ) - 10(GPA*Gender))\\
 =& 50 + 20(4.0) + 0.07(110) + 35(1) + 0.01(440) - 10(4)\\
 =& 172.7  + 0.01(440)-40\\
 =& 137.1 \qquad \square
 \end{align}
 
-    \subsubsection{}\label{section}
-
-False. This likely indicates that because there is a such a strong
-correlation, the salary does not need to depend on both. For example,
-someone with a high GPA likely has a high IQ. There is some an effect
-for which the model needs to account, but it should be minimal (ie.
-\(\hat{\beta}_4=0.01\)). They are each contributing factors, but we don't
-want to double count the effect. In addition, I would need to look at the p-Value of this term. 
+    Fasle. No conlcusion can be drawn from purely a coefficient, the
+standard error and p-value must be considered. For example, this counld
+indicate that because there is a such a strong correlation, the salary
+does not need to depend on both (ie. someone with a high GPA likely has
+a high IQ). However, without the p-value, there is not way to know
+wheter this is statistically significant.
 
     \subsection{Cubic vs.~Linear
 Regression}\label{cubic-vs.linear-regression}
 
-    \subsubsection{Given Linear Training Data}\label{general-comments}
+    \subsubsection{Linear Training}\label{linear-training}
 
 I would expect the cubic regression to be lower. While the true
 relationship might be linear, it is unlikely that this realization of
@@ -377,7 +377,7 @@ illustrating this behavior of more flexible models to fit training data.
 
 \includegraphics{interpolation_example}
 
-    \subsubsection{Given Linear Test Data}\label{given-linear-training-data}
+    \subsubsection{Given Linear Test Data}\label{given-linear-test-data}
 
 Knowing that the data represents a linear relationship, a linear fit of
 the training data will better predict the test data, decreasing the RSS.
@@ -386,9 +386,10 @@ flexibility will make it difficult to predict new data accurately (test
 data). this is illustrated by the green line above. The cubic model will
 be swayed by noise in the training data and attempt to fit to it.
 Therefore, linear model will be much accurate when new data is
-presented, especially if the true relationship is linear
+presented, especially if the true relationship is linear.
 
-    \subsubsection{Given non-linear Training Data}\label{given-non-linear-training-data}
+    \subsubsection{Given non-linear Training
+Data}\label{given-non-linear-training-data}
 
 Again, a more flexible model will preform better (lower RSS) in
 training. Because the model is more flexible, it will pass through more
@@ -420,16 +421,16 @@ shown by the image below: \includegraphics{rssY}
 The same logic can be applied for the line x = \(\bar{x}\).
 
 \(\hat{\beta}_1\) computes the slope by determining the covariance of x
-and y and normalizing by the x values. This will determine
-how best to fit the slope to the set of points.
+and y and normalizing by the x values. This will determine how best to
+fit the slope to the set of points.
 
 \(\hat{\beta}_0\) computes the ideal intercept by beginning at the
-(\(\bar{x}\), \(\bar{y}\)) and stepping back until x = 0. This will
+(\(\bar{x}, \bar{y}\)) and stepping back until x = 0. This will
 determine the best intercept.
 
 Therefore, if \(\bar{x}\) and \(\bar{y}\) minimize error on the
 respective axis, then to minimize the error for this linear model, the
-line should pass through the point (\(\bar{x}\), \(\bar{y}\)). To finish
+line should pass through the point \((\bar{x}, \bar{y})\). To finish
 minimizing error, the line should consider the slope and intercept of
 the line as denoted by \(\hat{\beta}_0\) and \(\hat{\beta}_1\)
 
@@ -443,50 +444,53 @@ the line as denoted by \(\hat{\beta}_0\) and \(\hat{\beta}_1\)
 data}\label{fitting-linear-regression-to-data}
 
     \begin{Verbatim}[commandchars=\\\{\}]
-{\color{incolor}In [{\color{incolor}2}]:} \PY{k+kn}{import} \PY{n+nn}{numpy} \PY{k}{as} \PY{n+nn}{np}
-        \PY{k+kn}{import} \PY{n+nn}{pandas} \PY{k}{as} \PY{n+nn}{pd}
-        \PY{k+kn}{import} \PY{n+nn}{seaborn} \PY{k}{as} \PY{n+nn}{sns}
-        \PY{k+kn}{import} \PY{n+nn}{matplotlib}\PY{n+nn}{.}\PY{n+nn}{pyplot} \PY{k}{as} \PY{n+nn}{plt}
-        \PY{o}{\PYZpc{}}\PY{k}{matplotlib} inline
-        \PY{n}{sns}\PY{o}{.}\PY{n}{set}\PY{p}{(}\PY{n}{context}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{poster}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{style}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{whitegrid}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+{\color{incolor}In [{\color{incolor}84}]:} \PY{k+kn}{import} \PY{n+nn}{numpy} \PY{k}{as} \PY{n+nn}{np}
+         \PY{k+kn}{import} \PY{n+nn}{pandas} \PY{k}{as} \PY{n+nn}{pd}
+         \PY{k+kn}{import} \PY{n+nn}{seaborn} \PY{k}{as} \PY{n+nn}{sns}
+         \PY{k+kn}{import} \PY{n+nn}{matplotlib}\PY{n+nn}{.}\PY{n+nn}{pyplot} \PY{k}{as} \PY{n+nn}{plt}
+         \PY{o}{\PYZpc{}}\PY{k}{matplotlib} inline
+         \PY{n}{sns}\PY{o}{.}\PY{n}{set}\PY{p}{(}\PY{n}{context}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{poster}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{style}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{whitegrid}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
 \end{Verbatim}
 
     \begin{Verbatim}[commandchars=\\\{\}]
-{\color{incolor}In [{\color{incolor}3}]:} \PY{n}{np}\PY{o}{.}\PY{n}{random}\PY{o}{.}\PY{n}{seed}\PY{p}{(}\PY{n}{seed}\PY{o}{=}\PY{l+m+mi}{42}\PY{p}{)}
-        \PY{n}{mu}\PY{p}{,} \PY{n}{sigma} \PY{o}{=} \PY{l+m+mi}{0}\PY{p}{,} \PY{l+m+mi}{1}
-        \PY{n}{x} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{random}\PY{o}{.}\PY{n}{normal}\PY{p}{(}\PY{n}{mu}\PY{p}{,} \PY{n}{sigma}\PY{p}{,} \PY{l+m+mi}{100}\PY{p}{)}
+{\color{incolor}In [{\color{incolor}85}]:} \PY{n}{np}\PY{o}{.}\PY{n}{random}\PY{o}{.}\PY{n}{seed}\PY{p}{(}\PY{n}{seed}\PY{o}{=}\PY{l+m+mi}{42}\PY{p}{)}
+         \PY{n}{mu}\PY{p}{,} \PY{n}{sigma} \PY{o}{=} \PY{l+m+mi}{0}\PY{p}{,} \PY{l+m+mi}{1}
+         \PY{n}{x} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{random}\PY{o}{.}\PY{n}{normal}\PY{p}{(}\PY{n}{mu}\PY{p}{,} \PY{n}{sigma}\PY{p}{,} \PY{l+m+mi}{100}\PY{p}{)}
 \end{Verbatim}
 
     \begin{Verbatim}[commandchars=\\\{\}]
-{\color{incolor}In [{\color{incolor}4}]:} \PY{n}{np}\PY{o}{.}\PY{n}{random}\PY{o}{.}\PY{n}{seed}\PY{p}{(}\PY{n}{seed}\PY{o}{=}\PY{l+m+mi}{31}\PY{p}{)}
-        \PY{n}{eps} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{random}\PY{o}{.}\PY{n}{normal}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,}\PY{n}{np}\PY{o}{.}\PY{n}{sqrt}\PY{p}{(}\PY{l+m+mf}{0.25}\PY{p}{)}\PY{p}{,} \PY{l+m+mi}{100}\PY{p}{)}
+{\color{incolor}In [{\color{incolor}86}]:} \PY{n}{np}\PY{o}{.}\PY{n}{random}\PY{o}{.}\PY{n}{seed}\PY{p}{(}\PY{n}{seed}\PY{o}{=}\PY{l+m+mi}{31}\PY{p}{)}
+         \PY{n}{eps} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{random}\PY{o}{.}\PY{n}{normal}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,}\PY{n}{np}\PY{o}{.}\PY{n}{sqrt}\PY{p}{(}\PY{l+m+mf}{0.25}\PY{p}{)}\PY{p}{,} \PY{l+m+mi}{100}\PY{p}{)}
 \end{Verbatim}
 
     \begin{Verbatim}[commandchars=\\\{\}]
-{\color{incolor}In [{\color{incolor}5}]:} \PY{n}{Y} \PY{o}{=} \PY{o}{\PYZhy{}}\PY{l+m+mi}{1} \PY{o}{+} \PY{l+m+mf}{0.5}\PY{o}{*}\PY{n}{x} \PY{o}{+} \PY{n}{eps}
+{\color{incolor}In [{\color{incolor}87}]:} \PY{n}{Y} \PY{o}{=} \PY{o}{\PYZhy{}}\PY{l+m+mi}{1} \PY{o}{+} \PY{l+m+mf}{0.5}\PY{o}{*}\PY{n}{x} \PY{o}{+} \PY{n}{eps}
 \end{Verbatim}
 
     \begin{Verbatim}[commandchars=\\\{\}]
-{\color{incolor}In [{\color{incolor}6}]:} \PY{n}{np}\PY{o}{.}\PY{n}{size}\PY{p}{(}\PY{n}{Y}\PY{p}{)}
+{\color{incolor}In [{\color{incolor}88}]:} \PY{n}{np}\PY{o}{.}\PY{n}{size}\PY{p}{(}\PY{n}{Y}\PY{p}{)}
 \end{Verbatim}
 
             \begin{Verbatim}[commandchars=\\\{\}]
-{\color{outcolor}Out[{\color{outcolor}6}]:} 100
+{\color{outcolor}Out[{\color{outcolor}88}]:} 100
 \end{Verbatim}
         
-    As indicated above, Y is 100 values long, as expected. \#\#\#\#
-\(\beta_0\) = -1 \#\#\#\# \(\beta_1\) = 0.5
+    As indicated above, Y is 100 values long, as expected.\textbackslash{}
+
+\(\beta_0\) = -1\textbackslash{}
+
+\(\beta_1\) = 0.5
 
     \begin{Verbatim}[commandchars=\\\{\}]
-{\color{incolor}In [{\color{incolor}7}]:} \PY{n}{plt}\PY{o}{.}\PY{n}{scatter}\PY{p}{(}\PY{n}{x}\PY{p}{,} \PY{n}{Y}\PY{p}{)}
+{\color{incolor}In [{\color{incolor}89}]:} \PY{n}{plt}\PY{o}{.}\PY{n}{scatter}\PY{p}{(}\PY{n}{x}\PY{p}{,} \PY{n}{Y}\PY{p}{)}
 \end{Verbatim}
 
             \begin{Verbatim}[commandchars=\\\{\}]
-{\color{outcolor}Out[{\color{outcolor}7}]:} <matplotlib.collections.PathCollection at 0x11a0f7278>
+{\color{outcolor}Out[{\color{outcolor}89}]:} <matplotlib.collections.PathCollection at 0x116c1f390>
 \end{Verbatim}
         
     \begin{center}
-    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{Homework 2_files/Homework 2_24_1.png}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{Homework 2_files/Homework 2_23_1.png}
     \end{center}
     { \hspace*{\fill} \\}
     
@@ -495,27 +499,22 @@ variation due to the addition of ``noise'' which is generated by
 \(\epsilon\).
 
     \begin{Verbatim}[commandchars=\\\{\}]
-{\color{incolor}In [{\color{incolor}8}]:} \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{linear\PYZus{}model} \PY{k}{import} \PY{n}{LinearRegression}
-        \PY{k+kn}{from} \PY{n+nn}{matplotlib}\PY{n+nn}{.}\PY{n+nn}{collections} \PY{k}{import} \PY{n}{LineCollection}
-        \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{metrics} \PY{k}{import} \PY{n}{mean\PYZus{}squared\PYZus{}error}\PY{p}{,} \PY{n}{classification\PYZus{}report}
-        \PY{k+kn}{import} \PY{n+nn}{statsmodels}\PY{n+nn}{.}\PY{n+nn}{api} \PY{k}{as} \PY{n+nn}{sm}
-        \PY{k+kn}{import} \PY{n+nn}{scipy}\PY{n+nn}{.}\PY{n+nn}{stats} \PY{k}{as} \PY{n+nn}{stats}
+{\color{incolor}In [{\color{incolor}90}]:} \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{linear\PYZus{}model} \PY{k}{import} \PY{n}{LinearRegression}
+         \PY{k+kn}{from} \PY{n+nn}{matplotlib}\PY{n+nn}{.}\PY{n+nn}{collections} \PY{k}{import} \PY{n}{LineCollection}
+         \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{metrics} \PY{k}{import} \PY{n}{mean\PYZus{}squared\PYZus{}error}\PY{p}{,} \PY{n}{classification\PYZus{}report}
+         \PY{k+kn}{import} \PY{n+nn}{statsmodels}\PY{n+nn}{.}\PY{n+nn}{api} \PY{k}{as} \PY{n+nn}{sm}
+         \PY{k+kn}{import} \PY{n+nn}{statsmodels}\PY{n+nn}{.}\PY{n+nn}{formula}\PY{n+nn}{.}\PY{n+nn}{api} \PY{k}{as} \PY{n+nn}{smf}
+         \PY{k+kn}{import} \PY{n+nn}{scipy}\PY{n+nn}{.}\PY{n+nn}{stats} \PY{k}{as} \PY{n+nn}{stats}
 \end{Verbatim}
 
     \begin{Verbatim}[commandchars=\\\{\}]
-/Users/Braden/anaconda/lib/python3.6/site-packages/statsmodels/compat/pandas.py:56: FutureWarning: The pandas.core.datetools module is deprecated and will be removed in a future version. Please use the pandas.tseries module instead.
-  from pandas.core import datetools
-
-    \end{Verbatim}
-
-    \begin{Verbatim}[commandchars=\\\{\}]
-{\color{incolor}In [{\color{incolor}9}]:} \PY{n}{lr} \PY{o}{=} \PY{n}{LinearRegression}\PY{p}{(}\PY{p}{)}
-        \PY{n}{lr}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{n}{x}\PY{p}{[}\PY{p}{:}\PY{p}{,} \PY{n}{np}\PY{o}{.}\PY{n}{newaxis}\PY{p}{]}\PY{p}{,} \PY{n}{Y}\PY{p}{)}  \PY{c+c1}{\PYZsh{} x needs to be 2d for LinearRegression}
-        \PY{n}{predsLr} \PY{o}{=} \PY{n}{lr}\PY{o}{.}\PY{n}{predict}\PY{p}{(}\PY{n}{x}\PY{p}{[}\PY{p}{:}\PY{p}{,} \PY{n}{np}\PY{o}{.}\PY{n}{newaxis}\PY{p}{]}\PY{p}{)}
+{\color{incolor}In [{\color{incolor}91}]:} \PY{n}{lr} \PY{o}{=} \PY{n}{LinearRegression}\PY{p}{(}\PY{p}{)}
+         \PY{n}{lr}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{n}{x}\PY{p}{[}\PY{p}{:}\PY{p}{,} \PY{n}{np}\PY{o}{.}\PY{n}{newaxis}\PY{p}{]}\PY{p}{,} \PY{n}{Y}\PY{p}{)}  \PY{c+c1}{\PYZsh{} x needs to be 2d for LinearRegression}
+         \PY{n}{predsLr} \PY{o}{=} \PY{n}{lr}\PY{o}{.}\PY{n}{predict}\PY{p}{(}\PY{n}{x}\PY{p}{[}\PY{p}{:}\PY{p}{,} \PY{n}{np}\PY{o}{.}\PY{n}{newaxis}\PY{p}{]}\PY{p}{)}
 \end{Verbatim}
 
     \begin{Verbatim}[commandchars=\\\{\}]
-{\color{incolor}In [{\color{incolor}10}]:} \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Best Fit: y = }\PY{l+s+s2}{\PYZdq{}} \PY{o}{+} \PY{n+nb}{str}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{round}\PY{p}{(}\PY{n}{lr}\PY{o}{.}\PY{n}{coef\PYZus{}}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,} \PY{l+m+mi}{3}\PY{p}{)}\PY{p}{)}\PY{o}{+}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{x }\PY{l+s+s2}{\PYZdq{}} \PY{o}{+}  \PY{n+nb}{str}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{round}\PY{p}{(}\PY{n}{lr}\PY{o}{.}\PY{n}{intercept\PYZus{}}\PY{p}{,} \PY{l+m+mi}{3}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+{\color{incolor}In [{\color{incolor}92}]:} \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Best Fit: y = }\PY{l+s+s2}{\PYZdq{}} \PY{o}{+} \PY{n+nb}{str}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{round}\PY{p}{(}\PY{n}{lr}\PY{o}{.}\PY{n}{coef\PYZus{}}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,} \PY{l+m+mi}{3}\PY{p}{)}\PY{p}{)}\PY{o}{+}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{x }\PY{l+s+s2}{\PYZdq{}} \PY{o}{+}  \PY{n+nb}{str}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{round}\PY{p}{(}\PY{n}{lr}\PY{o}{.}\PY{n}{intercept\PYZus{}}\PY{p}{,} \PY{l+m+mi}{3}\PY{p}{)}\PY{p}{)}\PY{p}{)}
          \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{beta\PYZus{}0 = }\PY{l+s+s2}{\PYZdq{}}\PY{o}{+} \PY{n+nb}{str}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{round}\PY{p}{(}\PY{n}{lr}\PY{o}{.}\PY{n}{intercept\PYZus{}}\PY{p}{,} \PY{l+m+mi}{3}\PY{p}{)}\PY{p}{)}\PY{p}{)}
          \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{beta\PYZus{}1 = }\PY{l+s+s2}{\PYZdq{}}\PY{o}{+} \PY{n+nb}{str}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{round}\PY{p}{(}\PY{n}{lr}\PY{o}{.}\PY{n}{coef\PYZus{}}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,} \PY{l+m+mi}{3}\PY{p}{)}\PY{p}{)}\PY{p}{)}
          \PY{n}{RSS} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{round}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{p}{(}\PY{n}{Y}\PY{o}{\PYZhy{}}\PY{n}{predsLr}\PY{p}{)}\PY{o}{*}\PY{o}{*}\PY{l+m+mi}{2}\PY{p}{)}\PY{p}{,} \PY{l+m+mi}{4}\PY{p}{)}
@@ -537,7 +536,7 @@ MSE = 0.2607
     \end{Verbatim}
 
     \begin{Verbatim}[commandchars=\\\{\}]
-{\color{incolor}In [{\color{incolor}11}]:} \PY{n}{results} \PY{o}{=} \PY{n}{sm}\PY{o}{.}\PY{n}{OLS}\PY{p}{(}\PY{n}{Y}\PY{p}{,} \PY{n}{sm}\PY{o}{.}\PY{n}{add\PYZus{}constant}\PY{p}{(}\PY{n}{x}\PY{p}{)}\PY{p}{)}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{p}{)}
+{\color{incolor}In [{\color{incolor}93}]:} \PY{n}{results} \PY{o}{=} \PY{n}{sm}\PY{o}{.}\PY{n}{OLS}\PY{p}{(}\PY{n}{Y}\PY{p}{,} \PY{n}{sm}\PY{o}{.}\PY{n}{add\PYZus{}constant}\PY{p}{(}\PY{n}{x}\PY{p}{)}\PY{p}{)}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{p}{)}
          \PY{n+nb}{print}\PY{p}{(}\PY{n}{results}\PY{o}{.}\PY{n}{summary}\PY{p}{(}\PY{p}{)}\PY{p}{)}
 \end{Verbatim}
 
@@ -547,8 +546,8 @@ MSE = 0.2607
 Dep. Variable:                      y   R-squared:                       0.430
 Model:                            OLS   Adj. R-squared:                  0.424
 Method:                 Least Squares   F-statistic:                     74.02
-Date:                Mon, 25 Sep 2017   Prob (F-statistic):           1.29e-13
-Time:                        12:14:35   Log-Likelihood:                -74.674
+Date:                Fri, 29 Sep 2017   Prob (F-statistic):           1.29e-13
+Time:                        11:24:09   Log-Likelihood:                -74.674
 No. Observations:                 100   AIC:                             153.3
 Df Residuals:                      98   BIC:                             158.6
 Df Model:                           1                                         
@@ -575,7 +574,7 @@ same. \(\hat{\beta}_0 = -1.0742\) and \(\hat{\beta}_1 = 0.4911\). These
 vary slightly from the values provided, but not substantially.
 
     \begin{Verbatim}[commandchars=\\\{\}]
-{\color{incolor}In [{\color{incolor}12}]:} \PY{n}{n} \PY{o}{=} \PY{n+nb}{len}\PY{p}{(}\PY{n}{Y}\PY{p}{)}
+{\color{incolor}In [{\color{incolor}94}]:} \PY{n}{n} \PY{o}{=} \PY{n+nb}{len}\PY{p}{(}\PY{n}{Y}\PY{p}{)}
          
          \PY{n}{segments} \PY{o}{=} \PY{p}{[}\PY{p}{[}\PY{p}{[}\PY{n}{i}\PY{p}{,} \PY{n}{Y}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{]}\PY{p}{]} \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{n}\PY{p}{)}\PY{p}{]}
          \PY{n}{lc} \PY{o}{=} \PY{n}{LineCollection}\PY{p}{(}\PY{n}{segments}\PY{p}{,} \PY{n}{zorder}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{)}
@@ -592,79 +591,16 @@ vary slightly from the values provided, but not substantially.
 \end{Verbatim}
 
     \begin{center}
-    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{Homework 2_files/Homework 2_31_0.png}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{Homework 2_files/Homework 2_30_0.png}
     \end{center}
     { \hspace*{\fill} \\}
     
     \begin{Verbatim}[commandchars=\\\{\}]
-{\color{incolor}In [{\color{incolor}13}]:} \PY{n}{X} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{column\PYZus{}stack}\PY{p}{(}\PY{p}{(}\PY{p}{(}\PY{n}{x}\PY{p}{)}\PY{o}{*}\PY{o}{*}\PY{l+m+mi}{2}\PY{p}{,} \PY{n}{x}\PY{p}{)}\PY{p}{)}
-         \PY{n}{X} \PY{o}{=} \PY{n}{sm}\PY{o}{.}\PY{n}{add\PYZus{}constant}\PY{p}{(}\PY{n}{X}\PY{p}{)}
-         \PY{n}{Beta} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{polyfit}\PY{p}{(}\PY{n}{x}\PY{p}{,} \PY{n}{Y}\PY{p}{,} \PY{l+m+mi}{2}\PY{p}{)}
-         \PY{n}{y} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{dot}\PY{p}{(}\PY{n}{X}\PY{p}{,} \PY{n}{Beta}\PY{p}{)} \PY{o}{+} \PY{n}{eps}
-         \PY{n}{res} \PY{o}{=} \PY{n}{sm}\PY{o}{.}\PY{n}{OLS}\PY{p}{(}\PY{n}{y}\PY{p}{,}\PY{n}{X}\PY{p}{)}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{p}{)}
-         \PY{n+nb}{print}\PY{p}{(}\PY{n}{res}\PY{o}{.}\PY{n}{summary}\PY{p}{(}\PY{p}{)}\PY{p}{)}
-\end{Verbatim}
-
-    \begin{Verbatim}[commandchars=\\\{\}]
-                            OLS Regression Results                            
-==============================================================================
-Dep. Variable:                      y   R-squared:                       0.851
-Model:                            OLS   Adj. R-squared:                  0.848
-Method:                 Least Squares   F-statistic:                     276.1
-Date:                Mon, 25 Sep 2017   Prob (F-statistic):           9.06e-41
-Time:                        12:14:35   Log-Likelihood:                -74.399
-No. Observations:                 100   AIC:                             154.8
-Df Residuals:                      97   BIC:                             162.6
-Df Model:                           2                                         
-Covariance Type:            nonrobust                                         
-==============================================================================
-                 coef    std err          t      P>|t|      [0.025      0.975]
-------------------------------------------------------------------------------
-const         -0.0814      0.064     -1.274      0.206      -0.208       0.045
-x1             0.4441      0.047      9.445      0.000       0.351       0.537
-x2            -1.0686      0.060    -17.885      0.000      -1.187      -0.950
-==============================================================================
-Omnibus:                        4.045   Durbin-Watson:                   2.001
-Prob(Omnibus):                  0.132   Jarque-Bera (JB):                3.508
-Skew:                           0.448   Prob(JB):                        0.173
-Kurtosis:                       3.200   Cond. No.                         2.27
-==============================================================================
-
-Warnings:
-[1] Standard Errors assume that the covariance matrix of the errors is correctly specified.
-
-    \end{Verbatim}
-
-    \begin{Verbatim}[commandchars=\\\{\}]
-{\color{incolor}In [{\color{incolor}14}]:} \PY{n}{q} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{poly1d}\PY{p}{(}\PY{n}{Beta}\PY{p}{)}
-         \PY{n}{xp} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{linspace}\PY{p}{(}\PY{n+nb}{min}\PY{p}{(}\PY{n}{x}\PY{p}{)}\PY{p}{,} \PY{n+nb}{max}\PY{p}{(}\PY{n}{x}\PY{p}{)}\PY{p}{,} \PY{l+m+mi}{100}\PY{p}{)}
-\end{Verbatim}
-
-    \begin{Verbatim}[commandchars=\\\{\}]
-{\color{incolor}In [{\color{incolor}15}]:} \PY{n}{y\PYZus{}pred} \PY{o}{=} \PY{n}{res}\PY{o}{.}\PY{n}{params}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{o}{*}\PY{p}{(}\PY{n}{xp}\PY{o}{*}\PY{o}{*}\PY{l+m+mi}{2}\PY{p}{)} \PY{o}{+} \PY{n}{res}\PY{o}{.}\PY{n}{params}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{o}{*}\PY{n}{xp} \PY{o}{+} \PY{n}{res}\PY{o}{.}\PY{n}{params}\PY{p}{[}\PY{l+m+mi}{2}\PY{p}{]}
-\end{Verbatim}
-
-    \begin{Verbatim}[commandchars=\\\{\}]
-{\color{incolor}In [{\color{incolor}16}]:} \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{x}\PY{p}{,} \PY{n}{Y}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{.}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{xp}\PY{p}{,} \PY{n}{q}\PY{p}{(}\PY{n}{xp}\PY{p}{)}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZhy{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{xp}\PY{p}{,} \PY{n}{y\PYZus{}pred}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZhy{}\PYZhy{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
-         \PY{n}{plt}\PY{o}{.}\PY{n}{legend}\PY{p}{(}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Data}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Numpy Polyplot}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{OSL Reg}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
-\end{Verbatim}
-
-            \begin{Verbatim}[commandchars=\\\{\}]
-{\color{outcolor}Out[{\color{outcolor}16}]:} <matplotlib.legend.Legend at 0x11ea71ef0>
-\end{Verbatim}
-        
-    \begin{center}
-    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{Homework 2_files/Homework 2_35_1.png}
-    \end{center}
-    { \hspace*{\fill} \\}
-    
-    ****Why are these values diffrent?
-
-    \begin{Verbatim}[commandchars=\\\{\}]
-{\color{incolor}In [{\color{incolor}17}]:} \PY{n}{var} \PY{o}{=} \PY{p}{[}\PY{o}{.}\PY{l+m+mi}{125}\PY{p}{,} \PY{o}{.}\PY{l+m+mi}{25}\PY{p}{,} \PY{o}{.}\PY{l+m+mi}{375}\PY{p}{,} \PY{o}{.}\PY{l+m+mi}{125}\PY{p}{,} \PY{o}{.}\PY{l+m+mi}{25}\PY{p}{,} \PY{o}{.}\PY{l+m+mi}{375}\PY{p}{]}
+{\color{incolor}In [{\color{incolor}95}]:} \PY{n}{var} \PY{o}{=} \PY{p}{[}\PY{o}{.}\PY{l+m+mi}{125}\PY{p}{,} \PY{o}{.}\PY{l+m+mi}{25}\PY{p}{,} \PY{o}{.}\PY{l+m+mi}{375}\PY{p}{,} \PY{o}{.}\PY{l+m+mi}{125}\PY{p}{,} \PY{o}{.}\PY{l+m+mi}{25}\PY{p}{,} \PY{o}{.}\PY{l+m+mi}{375}\PY{p}{]}
          \PY{n}{model} \PY{o}{=} \PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Linear}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Linear}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Linear}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Quad}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Quad}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Quad}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
          \PY{n}{df} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{DataFrame}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{zeros}\PY{p}{(}\PY{p}{[}\PY{l+m+mi}{6}\PY{p}{,} \PY{l+m+mi}{12}\PY{p}{]}\PY{p}{)}\PY{p}{,} \PY{n}{columns} \PY{o}{=} 
-                           \PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Eps Var}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Model}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{RSS}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{MSE}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{RSE}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{b1}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{b2}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Int}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ci [b2,b1,int]}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+                           \PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Eps Var}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Model}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{RSS}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{MSE}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{RSE}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{b1}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} 
+                            \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{b2}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Int}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ci [b2,b1,int]}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
                            \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Std Err b2}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Std Err b1}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Std Err b0}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
          \PY{n}{df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Eps Var}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{n}{var}
          \PY{n}{df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Model}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{n}{model}
@@ -702,105 +638,109 @@ Warnings:
                      \PY{n}{ax1}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{x}\PY{p}{,} \PY{n}{m}\PY{o}{.}\PY{n}{fittedvalues}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZhy{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{label}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Linear}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
                      
              \PY{k}{else}\PY{p}{:}
-                 \PY{n}{Beta} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{polyfit}\PY{p}{(}\PY{n}{x}\PY{p}{,} \PY{n}{Y}\PY{p}{,} \PY{l+m+mi}{2}\PY{p}{)}
-                 \PY{n}{y} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{dot}\PY{p}{(}\PY{n}{X}\PY{p}{,} \PY{n}{Beta}\PY{p}{)} \PY{o}{+} \PY{n}{eps}
-                 \PY{n}{m} \PY{o}{=} \PY{n}{sm}\PY{o}{.}\PY{n}{OLS}\PY{p}{(}\PY{n}{y}\PY{p}{,}\PY{n}{X}\PY{p}{)}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{p}{)}        
-                 \PY{n}{df}\PY{o}{.}\PY{n}{set\PYZus{}value}\PY{p}{(}\PY{n}{i}\PY{p}{,} \PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{b2}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{b1}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Int}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{n}{m}\PY{o}{.}\PY{n}{params}\PY{p}{)}
+                 \PY{n}{t} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{DataFrame}\PY{p}{(}\PY{p}{[}\PY{n}{x}\PY{p}{,} \PY{n}{Y}\PY{p}{]}\PY{p}{,} \PY{n}{index}\PY{o}{=}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{x}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Y}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+                 \PY{n}{t} \PY{o}{=} \PY{n}{t}\PY{o}{.}\PY{n}{transpose}\PY{p}{(}\PY{p}{)}
+                 \PY{n}{m} \PY{o}{=} \PY{n}{smf}\PY{o}{.}\PY{n}{ols}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Y\PYZti{}x+np.power(x,2)}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{data} \PY{o}{=} \PY{n}{t}\PY{p}{)}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{p}{)}  
+                 \PY{n}{df}\PY{o}{.}\PY{n}{set\PYZus{}value}\PY{p}{(}\PY{n}{i}\PY{p}{,} \PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{b2}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{b1}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Int}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{n}{np}\PY{o}{.}\PY{n}{round}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{n}{m}\PY{o}{.}\PY{n}{params}\PY{p}{)}\PY{p}{,} \PY{l+m+mi}{4}\PY{p}{)}\PY{p}{)}
                  \PY{n}{df}\PY{o}{.}\PY{n}{set\PYZus{}value}\PY{p}{(}\PY{n}{i}\PY{p}{,} \PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{RSS}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{n}{np}\PY{o}{.}\PY{n}{round}\PY{p}{(}\PY{n}{m}\PY{o}{.}\PY{n}{ssr}\PY{p}{,} \PY{l+m+mi}{4}\PY{p}{)}\PY{p}{)}
                  \PY{n}{df}\PY{o}{.}\PY{n}{set\PYZus{}value}\PY{p}{(}\PY{n}{i}\PY{p}{,} \PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{MSE}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{n}{np}\PY{o}{.}\PY{n}{round}\PY{p}{(}\PY{n}{m}\PY{o}{.}\PY{n}{mse\PYZus{}resid}\PY{p}{,} \PY{l+m+mi}{4}\PY{p}{)}\PY{p}{)}
                  \PY{n}{df}\PY{o}{.}\PY{n}{set\PYZus{}value}\PY{p}{(}\PY{n}{i}\PY{p}{,} \PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{RSE}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{n}{np}\PY{o}{.}\PY{n}{round}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{sqrt}\PY{p}{(}\PY{l+m+mi}{1}\PY{o}{/}\PY{n+nb}{len}\PY{p}{(}\PY{n}{Y}\PY{o}{\PYZhy{}}\PY{l+m+mi}{2}\PY{p}{)}\PY{o}{*}\PY{n}{m}\PY{o}{.}\PY{n}{ssr}\PY{p}{)}\PY{p}{,} \PY{l+m+mi}{4}\PY{p}{)}\PY{p}{)}
-                 \PY{n}{df}\PY{o}{.}\PY{n}{set\PYZus{}value}\PY{p}{(}\PY{n}{i}\PY{p}{,} \PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Std Err b2}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Std Err b1}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Std Err b0}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{n}{np}\PY{o}{.}\PY{n}{round}\PY{p}{(}\PY{n}{m}\PY{o}{.}\PY{n}{bse}\PY{p}{,} \PY{l+m+mi}{4} \PY{p}{)}\PY{p}{)}
-                 \PY{n}{df}\PY{o}{.}\PY{n}{set\PYZus{}value}\PY{p}{(}\PY{n}{i}\PY{p}{,} \PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ci [b2,b1,int]}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{n+nb}{str}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{round}\PY{p}{(}\PY{n}{m}\PY{o}{.}\PY{n}{conf\PYZus{}int}\PY{p}{(}\PY{p}{)}\PY{p}{,} \PY{l+m+mi}{4}\PY{p}{)}\PY{p}{)}\PY{p}{)}
-                 \PY{n}{y\PYZus{}pred} \PY{o}{=} \PY{n}{m}\PY{o}{.}\PY{n}{params}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{o}{*}\PY{p}{(}\PY{n}{xp}\PY{o}{*}\PY{o}{*}\PY{l+m+mi}{2}\PY{p}{)} \PY{o}{+} \PY{n}{m}\PY{o}{.}\PY{n}{params}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{o}{*}\PY{n}{xp} \PY{o}{+} \PY{n}{m}\PY{o}{.}\PY{n}{params}\PY{p}{[}\PY{l+m+mi}{2}\PY{p}{]}
+                 \PY{n}{df}\PY{o}{.}\PY{n}{set\PYZus{}value}\PY{p}{(}\PY{n}{i}\PY{p}{,} \PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Std Err b2}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Std Err b1}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Std Err b0}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{n}{np}\PY{o}{.}\PY{n}{round}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{n}{m}\PY{o}{.}\PY{n}{bse}\PY{p}{)}\PY{p}{,} \PY{l+m+mi}{4} \PY{p}{)}\PY{p}{)}
+                 \PY{n}{df}\PY{o}{.}\PY{n}{set\PYZus{}value}\PY{p}{(}\PY{n}{i}\PY{p}{,} \PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ci [b2,b1,int]}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{n+nb}{str}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{n}{m}\PY{o}{.}\PY{n}{conf\PYZus{}int}\PY{p}{(}\PY{p}{)}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+                 \PY{n}{y\PYZus{}pred} \PY{o}{=} \PY{n}{m}\PY{o}{.}\PY{n}{params}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{o}{*}\PY{p}{(}\PY{n}{x}\PY{o}{*}\PY{o}{*}\PY{l+m+mi}{2}\PY{p}{)} \PY{o}{+} \PY{n}{m}\PY{o}{.}\PY{n}{params}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{o}{*}\PY{n}{x} \PY{o}{+} \PY{n}{m}\PY{o}{.}\PY{n}{params}\PY{p}{[}\PY{l+m+mi}{2}\PY{p}{]}
                  \PY{k}{if} \PY{n}{v} \PY{o}{==} \PY{o}{.}\PY{l+m+mi}{375}\PY{p}{:}
-                     \PY{n}{l3} \PY{o}{=} \PY{n}{ax3}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{xp}\PY{p}{,} \PY{n}{y\PYZus{}pred}\PY{p}{,} \PY{n}{label}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Quadratic}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+                     \PY{n}{l3} \PY{o}{=} \PY{n}{ax3}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{sort}\PY{p}{(}\PY{n}{x}\PY{p}{)}\PY{p}{,} \PY{n}{np}\PY{o}{.}\PY{n}{sort}\PY{p}{(}\PY{n}{m}\PY{o}{.}\PY{n}{fittedvalues}\PY{p}{)}\PY{p}{,} \PY{n}{label}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Quadratic}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
                  \PY{k}{elif} \PY{n}{v} \PY{o}{==} \PY{o}{.}\PY{l+m+mi}{25}\PY{p}{:}
-                     \PY{n}{l3} \PY{o}{=} \PY{n}{ax2}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{xp}\PY{p}{,} \PY{n}{y\PYZus{}pred}\PY{p}{,} \PY{n}{label}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Quadratic}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+                     \PY{n}{l3} \PY{o}{=} \PY{n}{ax2}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{sort}\PY{p}{(}\PY{n}{x}\PY{p}{)}\PY{p}{,} \PY{n}{np}\PY{o}{.}\PY{n}{sort}\PY{p}{(}\PY{n}{m}\PY{o}{.}\PY{n}{fittedvalues}\PY{p}{)}\PY{p}{,} \PY{n}{label}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Quadratic}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
                  \PY{k}{else}\PY{p}{:}
-                     \PY{n}{l3} \PY{o}{=} \PY{n}{ax1}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{xp}\PY{p}{,} \PY{n}{y\PYZus{}pred}\PY{p}{,} \PY{n}{label}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Quadratic}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+                     \PY{n}{l3} \PY{o}{=} \PY{n}{ax1}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{sort}\PY{p}{(}\PY{n}{x}\PY{p}{)}\PY{p}{,} \PY{n}{np}\PY{o}{.}\PY{n}{sort}\PY{p}{(}\PY{n}{m}\PY{o}{.}\PY{n}{fittedvalues}\PY{p}{)}\PY{p}{,} \PY{n}{label}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Quadratic}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
          
          \PY{n}{handles}\PY{p}{,} \PY{n}{labels} \PY{o}{=} \PY{n}{ax3}\PY{o}{.}\PY{n}{get\PYZus{}legend\PYZus{}handles\PYZus{}labels}\PY{p}{(}\PY{p}{)}
          \PY{n}{f}\PY{o}{.}\PY{n}{legend}\PY{p}{(}\PY{n}{handles}\PY{p}{,} \PY{n}{labels}\PY{p}{,} \PY{n}{loc} \PY{o}{=} \PY{p}{(}\PY{l+m+mf}{0.5}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{)}\PY{p}{,} \PY{n}{ncol}\PY{o}{=}\PY{l+m+mi}{5} \PY{p}{)}
+         \PY{n}{ax1}\PY{o}{.}\PY{n}{set\PYZus{}title}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Eps var = 0.125}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{ax2}\PY{o}{.}\PY{n}{set\PYZus{}title}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Eps var = 0.25}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{ax3}\PY{o}{.}\PY{n}{set\PYZus{}title}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Eps var = 0.375}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
 \end{Verbatim}
 
             \begin{Verbatim}[commandchars=\\\{\}]
-{\color{outcolor}Out[{\color{outcolor}17}]:} <matplotlib.legend.Legend at 0x11f094860>
+{\color{outcolor}Out[{\color{outcolor}95}]:} <matplotlib.text.Text at 0x1165795f8>
 \end{Verbatim}
         
     \begin{center}
-    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{Homework 2_files/Homework 2_37_1.png}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{Homework 2_files/Homework 2_31_1.png}
     \end{center}
     { \hspace*{\fill} \\}
     
     \begin{Verbatim}[commandchars=\\\{\}]
-{\color{incolor}In [{\color{incolor}18}]:} \PY{n}{df}
+{\color{incolor}In [{\color{incolor}96}]:} \PY{n+nb}{print}\PY{p}{(}\PY{n}{df}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{p}{)}\PY{p}{)}
 \end{Verbatim}
 
-            \begin{Verbatim}[commandchars=\\\{\}]
-{\color{outcolor}Out[{\color{outcolor}18}]:}    Eps Var   Model      RSS     MSE     RSE        b1        b2       Int  \textbackslash{}
-         0    0.125  Linear  13.0350  0.1330  0.3610 -1.052466  0.000000  0.493682   
-         1    0.250  Linear  22.1979  0.2265  0.4711 -1.038366  0.000000  0.505778   
-         2    0.375  Linear  39.5935  0.4040  0.6292 -0.994353  0.000000  0.435533   
-         3    0.125    Quad  15.1892  0.1566  0.3897  0.412405 -0.062746 -1.044036   
-         4    0.250    Quad  22.1001  0.2278  0.4701  0.321515  0.085363 -0.989854   
-         5    0.375    Quad  34.4266  0.3549  0.5867  0.202061 -0.214669 -0.665325   
-         
-                                               ci [b2,b1,int]  Std Err b2  Std Err b1  \textbackslash{}
-         0            [[-1.1253 -0.9796]\textbackslash{}n [ 0.4136  0.5738]]      0.0000      0.0367   
-         1            [[-1.1334 -0.9433]\textbackslash{}n [ 0.4013  0.6103]]      0.0000      0.0479   
-         2            [[-1.1213 -0.8674]\textbackslash{}n [ 0.2959  0.5751]]      0.0000      0.0640   
-         3  [[-0.1342  0.0087]\textbackslash{}n [ 0.3216  0.5032]\textbackslash{}n [-1.1{\ldots}      0.0360      0.0457   
-         4  [[ -8.00000000e-04   1.71500000e-01]\textbackslash{}n [  2.12{\ldots}      0.0434      0.0552   
-         5  [[-0.3222 -0.1071]\textbackslash{}n [ 0.0654  0.3387]\textbackslash{}n [-0.8{\ldots}      0.0542      0.0688   
-         
-            Std Err b0  
-         0      0.0404  
-         1      0.0527  
-         2      0.0703  
-         3      0.0489  
-         4      0.0590  
-         5      0.0737  
-\end{Verbatim}
-        
     \begin{Verbatim}[commandchars=\\\{\}]
-{\color{incolor}In [{\color{incolor}19}]:} \PY{n}{sns}\PY{o}{.}\PY{n}{pairplot}\PY{p}{(}\PY{n}{df}\PY{p}{,} \PY{n}{hue}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Model}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+   Eps Var   Model      RSS     MSE     RSE        b1      b2       Int  \textbackslash{}
+0    0.125  Linear  13.0350  0.1330  0.3610 -1.052466  0.0000  0.493682   
+1    0.250  Linear  22.1979  0.2265  0.4711 -1.038366  0.0000  0.505778   
+2    0.375  Linear  39.5935  0.4040  0.6292 -0.994353  0.0000  0.435533   
+3    0.125    Quad  15.1892  0.1566  0.3897  0.456200 -1.0220 -0.031400   
+4    0.250    Quad  22.1001  0.2278  0.4701  0.410800 -0.9949  0.042700   
+
+                                      ci [b2,b1,int]  Std Err b2  Std Err b1  \textbackslash{}
+0            [[-1.1253 -0.9796]\textbackslash{}n [ 0.4136  0.5738]]      0.0000      0.0367   
+1            [[-1.1334 -0.9433]\textbackslash{}n [ 0.4013  0.6103]]      0.0000      0.0479   
+2            [[-1.1213 -0.8674]\textbackslash{}n [ 0.2959  0.5751]]      0.0000      0.0640   
+3  [[-1.11911219 -0.92492341]\textbackslash{}n [ 0.36543969  0.5{\ldots}      0.0489      0.0457   
+4  [[-1.11204493 -0.87780916]\textbackslash{}n [ 0.30127729  0.5{\ldots}      0.0590      0.0552   
+
+   Std Err b0  
+0      0.0404  
+1      0.0527  
+2      0.0703  
+3      0.0360  
+4      0.0434  
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}97}]:} \PY{n}{sns}\PY{o}{.}\PY{n}{pairplot}\PY{p}{(}\PY{n}{df}\PY{p}{,} \PY{n}{hue}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Model}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
 \end{Verbatim}
 
             \begin{Verbatim}[commandchars=\\\{\}]
-{\color{outcolor}Out[{\color{outcolor}19}]:} <seaborn.axisgrid.PairGrid at 0x11ed909b0>
+{\color{outcolor}Out[{\color{outcolor}97}]:} <seaborn.axisgrid.PairGrid at 0x116c3d860>
 \end{Verbatim}
         
     \begin{center}
-    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{Homework 2_files/Homework 2_39_1.png}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{Homework 2_files/Homework 2_33_1.png}
     \end{center}
     { \hspace*{\fill} \\}
     
     This has generated fairly expected resaults. When the varience of
 eplison decreased, linear models tended to preform better. This is
-indicated by the RSS, MSE, and RSE.
+indicated by the RSS, MSE, and RSE. Interestingly, the beta values seem
+to cluser based on algorithm chosen as to standard errors.
+Unsurpsisingly, the linear model performs better wiht a lower variance.
 
     \begin{Verbatim}[commandchars=\\\{\}]
-{\color{incolor}In [{\color{incolor}20}]:} \PY{n}{df}\PY{p}{[}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Eps Var}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Model}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ci [b2,b1,int]}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Std Err b2}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Std Err b1}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Std Err b0}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{]}
+{\color{incolor}In [{\color{incolor}98}]:} \PY{n+nb}{print}\PY{p}{(}\PY{n}{df}\PY{p}{[}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Eps Var}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Model}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ci [b2,b1,int]}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Std Err b2}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Std Err b1}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Std Err b0}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{]}\PY{p}{)}
 \end{Verbatim}
 
-            \begin{Verbatim}[commandchars=\\\{\}]
-{\color{outcolor}Out[{\color{outcolor}20}]:}    Eps Var   Model                                     ci [b2,b1,int]  \textbackslash{}
-         0    0.125  Linear            [[-1.1253 -0.9796]\textbackslash{}n [ 0.4136  0.5738]]   
-         1    0.250  Linear            [[-1.1334 -0.9433]\textbackslash{}n [ 0.4013  0.6103]]   
-         2    0.375  Linear            [[-1.1213 -0.8674]\textbackslash{}n [ 0.2959  0.5751]]   
-         3    0.125    Quad  [[-0.1342  0.0087]\textbackslash{}n [ 0.3216  0.5032]\textbackslash{}n [-1.1{\ldots}   
-         4    0.250    Quad  [[ -8.00000000e-04   1.71500000e-01]\textbackslash{}n [  2.12{\ldots}   
-         5    0.375    Quad  [[-0.3222 -0.1071]\textbackslash{}n [ 0.0654  0.3387]\textbackslash{}n [-0.8{\ldots}   
-         
-            Std Err b2  Std Err b1  Std Err b0  
-         0      0.0000      0.0367      0.0404  
-         1      0.0000      0.0479      0.0527  
-         2      0.0000      0.0640      0.0703  
-         3      0.0360      0.0457      0.0489  
-         4      0.0434      0.0552      0.0590  
-         5      0.0542      0.0688      0.0737  
-\end{Verbatim}
-        
+    \begin{Verbatim}[commandchars=\\\{\}]
+   Eps Var   Model                                     ci [b2,b1,int]  \textbackslash{}
+0    0.125  Linear            [[-1.1253 -0.9796]\textbackslash{}n [ 0.4136  0.5738]]   
+1    0.250  Linear            [[-1.1334 -0.9433]\textbackslash{}n [ 0.4013  0.6103]]   
+2    0.375  Linear            [[-1.1213 -0.8674]\textbackslash{}n [ 0.2959  0.5751]]   
+3    0.125    Quad  [[-1.11911219 -0.92492341]\textbackslash{}n [ 0.36543969  0.5{\ldots}   
+4    0.250    Quad  [[-1.11204493 -0.87780916]\textbackslash{}n [ 0.30127729  0.5{\ldots}   
+5    0.375    Quad  [[ -9.78837453e-01  -6.86487584e-01]\textbackslash{}n [  2.14{\ldots}   
+
+   Std Err b2  Std Err b1  Std Err b0  
+0      0.0000      0.0367      0.0404  
+1      0.0000      0.0479      0.0527  
+2      0.0000      0.0640      0.0703  
+3      0.0489      0.0457      0.0360  
+4      0.0590      0.0552      0.0434  
+5      0.0737      0.0688      0.0542  
+
+    \end{Verbatim}
+
     \subsubsection{Confidence intervals:}\label{confidence-intervals}
 
 The confidence intervals appears smaller on models with lower error.
@@ -812,31 +752,32 @@ by the Central Limit Theory Proof.
     \subsection{Question 6}\label{question-6}
 
     \begin{Verbatim}[commandchars=\\\{\}]
-{\color{incolor}In [{\color{incolor}21}]:} \PY{n}{df} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{read\PYZus{}csv}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Auto.csv}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+{\color{incolor}In [{\color{incolor}99}]:} \PY{n}{df} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{read\PYZus{}csv}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Auto.csv}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
 \end{Verbatim}
 
     \begin{Verbatim}[commandchars=\\\{\}]
-{\color{incolor}In [{\color{incolor}22}]:} \PY{n}{df}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{p}{)}
+{\color{incolor}In [{\color{incolor}100}]:} \PY{n+nb}{print}\PY{p}{(}\PY{n}{df}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{p}{)}\PY{p}{)}
 \end{Verbatim}
 
-            \begin{Verbatim}[commandchars=\\\{\}]
-{\color{outcolor}Out[{\color{outcolor}22}]:}     mpg  cylinders  displacement  horsepower  weight  acceleration  year  \textbackslash{}
-         0  18.0          8         307.0         130    3504          12.0    70   
-         1  15.0          8         350.0         165    3693          11.5    70   
-         2  18.0          8         318.0         150    3436          11.0    70   
-         3  16.0          8         304.0         150    3433          12.0    70   
-         4  17.0          8         302.0         140    3449          10.5    70   
-         
-            origin                       name  
-         0       1  chevrolet chevelle malibu  
-         1       1          buick skylark 320  
-         2       1         plymouth satellite  
-         3       1              amc rebel sst  
-         4       1                ford torino  
-\end{Verbatim}
-        
     \begin{Verbatim}[commandchars=\\\{\}]
-{\color{incolor}In [{\color{incolor} }]:} \PY{n}{df}\PY{o}{.}\PY{n}{info}\PY{p}{(}\PY{p}{)}
+    mpg  cylinders  displacement  horsepower  weight  acceleration  year  \textbackslash{}
+0  18.0          8         307.0         130    3504          12.0    70   
+1  15.0          8         350.0         165    3693          11.5    70   
+2  18.0          8         318.0         150    3436          11.0    70   
+3  16.0          8         304.0         150    3433          12.0    70   
+4  17.0          8         302.0         140    3449          10.5    70   
+
+   origin                       name  
+0       1  chevrolet chevelle malibu  
+1       1          buick skylark 320  
+2       1         plymouth satellite  
+3       1              amc rebel sst  
+4       1                ford torino  
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}101}]:} \PY{n}{df}\PY{o}{.}\PY{n}{info}\PY{p}{(}\PY{p}{)}
 \end{Verbatim}
 
     \begin{Verbatim}[commandchars=\\\{\}]
@@ -858,88 +799,523 @@ memory usage: 27.6+ KB
     \end{Verbatim}
 
     \begin{Verbatim}[commandchars=\\\{\}]
-{\color{incolor}In [{\color{incolor} }]:} \PY{n}{sns}\PY{o}{.}\PY{n}{pairplot}\PY{p}{(}\PY{n}{df}\PY{p}{,} \PY{n}{hue}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{origin}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+{\color{incolor}In [{\color{incolor}102}]:} \PY{n}{sns}\PY{o}{.}\PY{n}{pairplot}\PY{p}{(}\PY{n}{df}\PY{p}{,} \PY{n}{hue}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{origin}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
 \end{Verbatim}
 
-    \begin{Verbatim}[commandchars=\\\{\}]
-{\color{incolor}In [{\color{incolor} }]:} \PY{n}{p} \PY{o}{=} \PY{n}{sns}\PY{o}{.}\PY{n}{heatmap}\PY{p}{(}\PY{n}{df}\PY{o}{.}\PY{n}{corr}\PY{p}{(}\PY{p}{)}\PY{p}{,} \PY{n}{annot}\PY{o}{=}\PY{k+kc}{True}\PY{p}{)}
-        \PY{n}{plt}\PY{o}{.}\PY{n}{xticks}\PY{p}{(}\PY{n}{rotation}\PY{o}{=}\PY{l+m+mi}{90}\PY{p}{)} 
+            \begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}102}]:} <seaborn.axisgrid.PairGrid at 0x11bda7ef0>
 \end{Verbatim}
-
-    \begin{Verbatim}[commandchars=\\\{\}]
-{\color{incolor}In [{\color{incolor} }]:} \PY{k+kn}{from} \PY{n+nn}{statsmodels}\PY{n+nn}{.}\PY{n+nn}{formula}\PY{n+nn}{.}\PY{n+nn}{api} \PY{k}{import} \PY{n}{ols}
         
-        \PY{n}{res} \PY{o}{=} \PY{n}{ols}\PY{p}{(}\PY{n}{formula}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{mpg \PYZti{} cylinders + displacement + horsepower + weight + acceleration + year + origin}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} 
-                     \PY{n}{data}\PY{o}{=}\PY{n}{df}\PY{p}{)}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{p}{)}
-        \PY{n+nb}{print}\PY{p}{(}\PY{n}{res}\PY{o}{.}\PY{n}{summary}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{Homework 2_files/Homework 2_41_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}103}]:} \PY{n}{p} \PY{o}{=} \PY{n}{sns}\PY{o}{.}\PY{n}{heatmap}\PY{p}{(}\PY{n}{df}\PY{o}{.}\PY{n}{corr}\PY{p}{(}\PY{p}{)}\PY{p}{,} \PY{n}{annot}\PY{o}{=}\PY{k+kc}{True}\PY{p}{)}
+          \PY{n}{plt}\PY{o}{.}\PY{n}{xticks}\PY{p}{(}\PY{n}{rotation}\PY{o}{=}\PY{l+m+mi}{90}\PY{p}{)} 
+\end{Verbatim}
+
+            \begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}103}]:} (array([ 0.5,  1.5,  2.5,  3.5,  4.5,  5.5,  6.5,  7.5]),
+           <a list of 8 Text xticklabel objects>)
+\end{Verbatim}
+        
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{Homework 2_files/Homework 2_42_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}108}]:} \PY{n}{res} \PY{o}{=} \PY{n}{smf}\PY{o}{.}\PY{n}{ols}\PY{p}{(}\PY{n}{formula}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{mpg \PYZti{} cylinders + displacement + horsepower}\PY{l+s+s1}{\PYZsq{}}
+                        \PY{o}{+} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{+ weight + acceleration + year + origin}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} 
+                       \PY{n}{data}\PY{o}{=}\PY{n}{df}\PY{p}{)}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{p}{)}
+          \PY{n+nb}{print}\PY{p}{(}\PY{n}{res}\PY{o}{.}\PY{n}{summary}\PY{p}{(}\PY{p}{)}\PY{p}{)}
 \end{Verbatim}
 
     \begin{Verbatim}[commandchars=\\\{\}]
-{\color{incolor}In [{\color{incolor} }]:} \PY{n}{RSS} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{round}\PY{p}{(}\PY{n}{res}\PY{o}{.}\PY{n}{ssr}\PY{p}{,} \PY{l+m+mi}{4}\PY{p}{)}
-        \PY{n}{RSE} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{round}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{sqrt}\PY{p}{(}\PY{l+m+mi}{1}\PY{o}{/}\PY{n+nb}{len}\PY{p}{(}\PY{n}{Y}\PY{o}{\PYZhy{}}\PY{l+m+mi}{2}\PY{p}{)}\PY{o}{*}\PY{n}{RSS}\PY{p}{)}\PY{p}{,} \PY{l+m+mi}{4}\PY{p}{)}
-        \PY{n}{MSE} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{round}\PY{p}{(}\PY{n}{res}\PY{o}{.}\PY{n}{mse\PYZus{}resid}\PY{p}{,} \PY{l+m+mi}{4}\PY{p}{)}
-        \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{RSS = }\PY{l+s+s1}{\PYZsq{}} \PY{o}{+} \PY{n+nb}{str}\PY{p}{(}\PY{n}{RSS}\PY{p}{)}\PY{p}{)}
-        \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{RSE = }\PY{l+s+s1}{\PYZsq{}} \PY{o}{+} \PY{n+nb}{str}\PY{p}{(}\PY{n}{RSE}\PY{p}{)}\PY{p}{)}
-        \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{MSE = }\PY{l+s+s2}{\PYZdq{}} \PY{o}{+}  \PY{n+nb}{str}\PY{p}{(}\PY{n}{MSE}\PY{p}{)}\PY{p}{)}
-\end{Verbatim}
+                            OLS Regression Results                            
+==============================================================================
+Dep. Variable:                    mpg   R-squared:                       0.821
+Model:                            OLS   Adj. R-squared:                  0.818
+Method:                 Least Squares   F-statistic:                     252.4
+Date:                Fri, 29 Sep 2017   Prob (F-statistic):          2.04e-139
+Time:                        11:25:51   Log-Likelihood:                -1023.5
+No. Observations:                 392   AIC:                             2063.
+Df Residuals:                     384   BIC:                             2095.
+Df Model:                           7                                         
+Covariance Type:            nonrobust                                         
+================================================================================
+                   coef    std err          t      P>|t|      [0.025      0.975]
+--------------------------------------------------------------------------------
+Intercept      -17.2184      4.644     -3.707      0.000     -26.350      -8.087
+cylinders       -0.4934      0.323     -1.526      0.128      -1.129       0.142
+displacement     0.0199      0.008      2.647      0.008       0.005       0.035
+horsepower      -0.0170      0.014     -1.230      0.220      -0.044       0.010
+weight          -0.0065      0.001     -9.929      0.000      -0.008      -0.005
+acceleration     0.0806      0.099      0.815      0.415      -0.114       0.275
+year             0.7508      0.051     14.729      0.000       0.651       0.851
+origin           1.4261      0.278      5.127      0.000       0.879       1.973
+==============================================================================
+Omnibus:                       31.906   Durbin-Watson:                   1.309
+Prob(Omnibus):                  0.000   Jarque-Bera (JB):               53.100
+Skew:                           0.529   Prob(JB):                     2.95e-12
+Kurtosis:                       4.460   Cond. No.                     8.59e+04
+==============================================================================
 
-    \paragraph{There does appear to be a statistical correlation between the
-factors and mpg. More specifically, the intercept, weight, displacement,
-year, and origin have the largest impact. This data is highly unlikely
-to have ocurred randomly. Logically, as regulations have required car
-companies to increase their avergae MPG, year and has a large impact on
-MPG. Holding everything else constant, MPG increases by 0.75 for year. I
-find it interesting that origin also has a significant impact. Given the
-key, it shows that the rest of the world (not America) is much more
-efficient than the US. Japan and the EU have much higher MPG
-requirements.}\label{there-does-appear-to-be-a-statistical-correlation-between-the-factors-and-mpg.-more-specifically-the-intercept-weight-displacement-year-and-origin-have-the-largest-impact.-this-data-is-highly-unlikely-to-have-ocurred-randomly.-logically-as-regulations-have-required-car-companies-to-increase-their-avergae-mpg-year-and-has-a-large-impact-on-mpg.-holding-everything-else-constant-mpg-increases-by-0.75-for-year.-i-find-it-interesting-that-origin-also-has-a-significant-impact.-given-the-key-it-shows-that-the-rest-of-the-world-not-america-is-much-more-efficient-than-the-us.-japan-and-the-eu-have-much-higher-mpg-requirements.}
+Warnings:
+[1] Standard Errors assume that the covariance matrix of the errors is correctly specified.
+[2] The condition number is large, 8.59e+04. This might indicate that there are
+strong multicollinearity or other numerical problems.
+
+    \end{Verbatim}
 
     \begin{Verbatim}[commandchars=\\\{\}]
-{\color{incolor}In [{\color{incolor} }]:} \PY{n}{plt}\PY{o}{.}\PY{n}{stem}\PY{p}{(}\PY{n}{res}\PY{o}{.}\PY{n}{resid}\PY{p}{)}
-        \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Stemplot of Residuals}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+{\color{incolor}In [{\color{incolor}109}]:} \PY{n}{RSS} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{round}\PY{p}{(}\PY{n}{res}\PY{o}{.}\PY{n}{ssr}\PY{p}{,} \PY{l+m+mi}{4}\PY{p}{)}
+          \PY{n}{RSE} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{round}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{sqrt}\PY{p}{(}\PY{l+m+mi}{1}\PY{o}{/}\PY{n}{res}\PY{o}{.}\PY{n}{df\PYZus{}resid}\PY{o}{*}\PY{n}{RSS}\PY{p}{)}\PY{p}{,} \PY{l+m+mi}{4}\PY{p}{)}
+          \PY{n}{MSE} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{round}\PY{p}{(}\PY{n}{res}\PY{o}{.}\PY{n}{mse\PYZus{}resid}\PY{p}{,} \PY{l+m+mi}{4}\PY{p}{)}
+          \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{RSS: }\PY{l+s+s1}{\PYZsq{}} \PY{o}{+} \PY{n+nb}{str}\PY{p}{(}\PY{n}{RSS}\PY{p}{)}\PY{p}{)}
+          \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{RSE: }\PY{l+s+s1}{\PYZsq{}} \PY{o}{+} \PY{n+nb}{str}\PY{p}{(}\PY{n}{RSE}\PY{p}{)}\PY{p}{)}
+          \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{MSE: }\PY{l+s+s2}{\PYZdq{}} \PY{o}{+}  \PY{n+nb}{str}\PY{p}{(}\PY{n}{MSE}\PY{p}{)}\PY{p}{)}
 \end{Verbatim}
 
     \begin{Verbatim}[commandchars=\\\{\}]
-{\color{incolor}In [{\color{incolor} }]:} \PY{n}{sm}\PY{o}{.}\PY{n}{qqplot}\PY{p}{(}\PY{n}{res}\PY{o}{.}\PY{n}{resid}\PY{p}{,} \PY{n}{line}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{r}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{fit}\PY{o}{=}\PY{k+kc}{True}\PY{p}{)}
-\end{Verbatim}
+RSS: 4252.2125
+RSE: 3.3277
+MSE: 11.0735
+
+    \end{Verbatim}
+
+    There does appear to be a statistical correlation between the factors
+and mpg. More specifically, the intercept, weight, displacement, year,
+and origin have the largest impact. This data is highly unlikely to have
+ocurred randomly. Logically, as regulations have required car companies
+to increase their average MPG, year and has a large impact on MPG.
+Holding everything else constant, MPG increases by 0.75 for year. I find
+it interesting that origin also has a significant impact. Given the key,
+it shows that the rest of the world (not America) is much more efficient
+than the US. Japan and the EU have much higher MPG requirements.
 
     \begin{Verbatim}[commandchars=\\\{\}]
-{\color{incolor}In [{\color{incolor} }]:} \PY{n}{sns}\PY{o}{.}\PY{n}{boxplot}\PY{p}{(}\PY{n}{res}\PY{o}{.}\PY{n}{resid}\PY{p}{)}
-        \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Boxplot of Residuals}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+{\color{incolor}In [{\color{incolor}110}]:} \PY{n}{plt}\PY{o}{.}\PY{n}{stem}\PY{p}{(}\PY{n}{res}\PY{o}{.}\PY{n}{resid}\PY{p}{)}
+          \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Stemplot of Residuals}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
 \end{Verbatim}
 
+            \begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}110}]:} <matplotlib.text.Text at 0x12093c898>
+\end{Verbatim}
+        
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{Homework 2_files/Homework 2_46_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}111}]:} \PY{n}{fig}\PY{p}{,} \PY{p}{[}\PY{n}{ax1}\PY{p}{,} \PY{n}{ax2}\PY{p}{,} \PY{n}{ax3}\PY{p}{]} \PY{o}{=} \PY{n}{plt}\PY{o}{.}\PY{n}{subplots}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{3}\PY{p}{)}
+          \PY{n}{sns}\PY{o}{.}\PY{n}{boxplot}\PY{p}{(}\PY{n}{res}\PY{o}{.}\PY{n}{resid}\PY{p}{,} \PY{n}{ax}\PY{o}{=}\PY{n}{ax1}\PY{p}{)}
+          \PY{n}{ax1}\PY{o}{.}\PY{n}{set\PYZus{}title}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Residuals}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+          \PY{n}{ax2}\PY{o}{.}\PY{n}{set\PYZus{}title}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Residuals fit to Normal Dist}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+          \PY{n}{sm}\PY{o}{.}\PY{n}{qqplot}\PY{p}{(}\PY{n}{res}\PY{o}{.}\PY{n}{resid}\PY{p}{,} \PY{n}{line}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{45}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{fit}\PY{o}{=}\PY{k+kc}{True}\PY{p}{,} \PY{n}{ax}\PY{o}{=}\PY{n}{ax2}\PY{p}{)}\PY{p}{;}
+          \PY{n}{sns}\PY{o}{.}\PY{n}{distplot}\PY{p}{(}\PY{n}{res}\PY{o}{.}\PY{n}{resid}\PY{p}{,} \PY{n}{ax}\PY{o}{=}\PY{n}{ax3}\PY{p}{)}
+\end{Verbatim}
+
+            \begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}111}]:} <matplotlib.axes.\_subplots.AxesSubplot at 0x121744ba8>
+\end{Verbatim}
+        
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{Homework 2_files/Homework 2_47_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
     It appears that there are outliers. The majority of the model's
 residuals appear to fit well to a normal model (as expected) until we
 reach the higher and lower quartiles. The Q-Q plot is fitted to a normal
 model.
 
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}112}]:} \PY{n}{resid} \PY{o}{=} \PY{n}{res}\PY{o}{.}\PY{n}{outlier\PYZus{}test}\PY{p}{(}\PY{p}{)}
+          \PY{n}{resid}\PY{p}{[}\PY{n}{resid}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{unadj\PYZus{}p}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{\PYZlt{}}\PY{l+m+mf}{0.05}\PY{p}{]}\PY{o}{.}\PY{n}{count}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+            \begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}112}]:} student\_resid    18
+          unadj\_p          18
+          bonf(p)          18
+          dtype: int64
+\end{Verbatim}
+        
     \subsubsection{Alter Variables by sqrt}\label{alter-variables-by-sqrt}
 
     \begin{Verbatim}[commandchars=\\\{\}]
-{\color{incolor}In [{\color{incolor} }]:} \PY{n}{sqr} \PY{o}{=} \PY{n}{ols}\PY{p}{(}\PY{n}{formula}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{mpg \PYZti{} cylinders + displacement + horsepower + weight + acceleration + year + origin}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} 
-                     \PY{n}{data}\PY{o}{=}\PY{n}{df}\PY{p}{)}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{p}{)}
-        \PY{n}{fig}\PY{p}{,} \PY{p}{[}\PY{n}{ax1}\PY{p}{,} \PY{n}{ax2}\PY{p}{]} \PY{o}{=} \PY{n}{plt}\PY{o}{.}\PY{n}{subplots}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{2}\PY{p}{)}
-        \PY{n}{sns}\PY{o}{.}\PY{n}{boxplot}\PY{p}{(}\PY{n}{sqr}\PY{o}{.}\PY{n}{resid}\PY{p}{,} \PY{n}{ax}\PY{o}{=}\PY{n}{ax1}\PY{p}{)}
-        \PY{n}{sm}\PY{o}{.}\PY{n}{qqplot}\PY{p}{(}\PY{n}{sqr}\PY{o}{.}\PY{n}{resid}\PY{p}{,} \PY{n}{line}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{r}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{fit}\PY{o}{=}\PY{k+kc}{True}\PY{p}{,} \PY{n}{ax}\PY{o}{=}\PY{n}{ax2}\PY{p}{)}
+{\color{incolor}In [{\color{incolor}113}]:} \PY{n}{sqr} \PY{o}{=} \PY{n}{smf}\PY{o}{.}\PY{n}{ols}\PY{p}{(}\PY{n}{formula}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{mpg \PYZti{} cylinders + displacement + np.sqrt(horsepower)}\PY{l+s+s1}{\PYZsq{}}\PY{o}{+} 
+                        \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{+ weight + acceleration + year + origin}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} 
+                       \PY{n}{data}\PY{o}{=}\PY{n}{df}\PY{p}{)}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{p}{)}
+          \PY{n}{fig}\PY{p}{,} \PY{p}{[}\PY{n}{ax1}\PY{p}{,} \PY{n}{ax2}\PY{p}{,} \PY{n}{ax3}\PY{p}{]} \PY{o}{=} \PY{n}{plt}\PY{o}{.}\PY{n}{subplots}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{3}\PY{p}{)}
+          \PY{n}{sns}\PY{o}{.}\PY{n}{boxplot}\PY{p}{(}\PY{n}{sqr}\PY{o}{.}\PY{n}{resid}\PY{p}{,} \PY{n}{ax}\PY{o}{=}\PY{n}{ax1}\PY{p}{)}
+          \PY{n}{sm}\PY{o}{.}\PY{n}{qqplot}\PY{p}{(}\PY{n}{sqr}\PY{o}{.}\PY{n}{resid}\PY{p}{,} \PY{n}{line}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{45}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{fit}\PY{o}{=}\PY{k+kc}{True}\PY{p}{,} \PY{n}{ax}\PY{o}{=}\PY{n}{ax2}\PY{p}{)}\PY{p}{;}
+          \PY{n}{sns}\PY{o}{.}\PY{n}{distplot}\PY{p}{(}\PY{n}{sqr}\PY{o}{.}\PY{n}{resid}\PY{p}{,} \PY{n}{ax}\PY{o}{=}\PY{n}{ax3}\PY{p}{)}
+\end{Verbatim}
+
+            \begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}113}]:} <matplotlib.axes.\_subplots.AxesSubplot at 0x121a9dd68>
+\end{Verbatim}
+        
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{Homework 2_files/Homework 2_51_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}114}]:} \PY{n+nb}{print}\PY{p}{(}\PY{n}{sqr}\PY{o}{.}\PY{n}{summary}\PY{p}{(}\PY{p}{)}\PY{p}{)}
 \end{Verbatim}
 
     \begin{Verbatim}[commandchars=\\\{\}]
-{\color{incolor}In [{\color{incolor} }]:} \PY{n+nb}{print}\PY{p}{(}\PY{n}{sqr}\PY{o}{.}\PY{n}{summary}\PY{p}{(}\PY{p}{)}\PY{p}{)}
-\end{Verbatim}
+                            OLS Regression Results                            
+==============================================================================
+Dep. Variable:                    mpg   R-squared:                       0.827
+Model:                            OLS   Adj. R-squared:                  0.824
+Method:                 Least Squares   F-statistic:                     262.0
+Date:                Fri, 29 Sep 2017   Prob (F-statistic):          5.83e-142
+Time:                        11:25:55   Log-Likelihood:                -1017.5
+No. Observations:                 392   AIC:                             2051.
+Df Residuals:                     384   BIC:                             2083.
+Df Model:                           7                                         
+Covariance Type:            nonrobust                                         
+=======================================================================================
+                          coef    std err          t      P>|t|      [0.025      0.975]
+---------------------------------------------------------------------------------------
+Intercept              -6.0374      5.546     -1.089      0.277     -16.942       4.867
+cylinders              -0.5223      0.317     -1.649      0.100      -1.145       0.100
+displacement            0.0221      0.007      3.064      0.002       0.008       0.036
+np.sqrt(horsepower)    -1.1435      0.311     -3.672      0.000      -1.756      -0.531
+weight                 -0.0055      0.001     -7.979      0.000      -0.007      -0.004
+acceleration           -0.1021      0.104     -0.983      0.326      -0.306       0.102
+year                    0.7240      0.050     14.429      0.000       0.625       0.823
+origin                  1.5173      0.270      5.612      0.000       0.986       2.049
+==============================================================================
+Omnibus:                       32.516   Durbin-Watson:                   1.343
+Prob(Omnibus):                  0.000   Jarque-Bera (JB):               53.556
+Skew:                           0.542   Prob(JB):                     2.35e-12
+Kurtosis:                       4.451   Cond. No.                     1.04e+05
+==============================================================================
 
-    Sqrt does not appear to deal with the outliers well. I was hoping that
-it would minimize the extreme values, but it only enlarged them.
+Warnings:
+[1] Standard Errors assume that the covariance matrix of the errors is correctly specified.
+[2] The condition number is large, 1.04e+05. This might indicate that there are
+strong multicollinearity or other numerical problems.
+
+    \end{Verbatim}
+
+    Sqrt does appear to group residuals well, but does not minimize the
+number of outliers as evident by the distplot. The transformed variable
+remains significant and the scale of the coefficient changes as the
+units shrink. This is fairly expected. I would be interested in
+understanding what changes the outliers cause.
 
     \subsubsection{Alter Variables by log}\label{alter-variables-by-log}
 
     \begin{Verbatim}[commandchars=\\\{\}]
-{\color{incolor}In [{\color{incolor} }]:} \PY{n}{dflog} \PY{o}{=} \PY{n}{df}\PY{o}{.}\PY{n}{drop}\PY{p}{(}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{name}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{mpg}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)}\PY{o}{.}\PY{n}{apply}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{log}\PY{p}{)}
-        \PY{n}{log} \PY{o}{=} \PY{n}{ols}\PY{p}{(}\PY{n}{formula}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{mpg \PYZti{} cylinders + displacement + horsepower + weight + acceleration + year + origin}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} 
-                     \PY{n}{data}\PY{o}{=}\PY{n}{pd}\PY{o}{.}\PY{n}{concat}\PY{p}{(}\PY{p}{[}\PY{n}{dflog}\PY{p}{,} \PY{n}{df}\PY{o}{.}\PY{n}{mpg}\PY{p}{]}\PY{p}{,} \PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{)}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{p}{)}
-        \PY{n}{fig}\PY{p}{,} \PY{p}{[}\PY{n}{ax1}\PY{p}{,} \PY{n}{ax2}\PY{p}{]} \PY{o}{=} \PY{n}{plt}\PY{o}{.}\PY{n}{subplots}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{2}\PY{p}{)}
-        \PY{n}{sns}\PY{o}{.}\PY{n}{boxplot}\PY{p}{(}\PY{n}{log}\PY{o}{.}\PY{n}{resid}\PY{p}{,} \PY{n}{ax}\PY{o}{=}\PY{n}{ax1}\PY{p}{)}
-        \PY{n}{sm}\PY{o}{.}\PY{n}{qqplot}\PY{p}{(}\PY{n}{log}\PY{o}{.}\PY{n}{resid}\PY{p}{,} \PY{n}{line}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{s}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{fit}\PY{o}{=}\PY{k+kc}{True}\PY{p}{,} \PY{n}{ax}\PY{o}{=}\PY{n}{ax2}\PY{p}{)}
+{\color{incolor}In [{\color{incolor}115}]:} \PY{n}{df}\PY{o}{.}\PY{n}{columns}
 \end{Verbatim}
+
+            \begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}115}]:} Index(['mpg', 'cylinders', 'displacement', 'horsepower', 'weight',
+                 'acceleration', 'year', 'origin', 'name'],
+                dtype='object')
+\end{Verbatim}
+        
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}116}]:} \PY{n}{log} \PY{o}{=} \PY{n}{smf}\PY{o}{.}\PY{n}{ols}\PY{p}{(}\PY{n}{formula}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{mpg \PYZti{} cylinders + displacement + np.log(horsepower)}\PY{l+s+s1}{\PYZsq{}} \PY{o}{+}
+                        \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{+ weight + acceleration + year + origin}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} 
+                       \PY{n}{data}\PY{o}{=}\PY{n}{df}\PY{p}{)}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{p}{)}
+          \PY{n}{fig}\PY{p}{,} \PY{p}{[}\PY{n}{ax1}\PY{p}{,} \PY{n}{ax2}\PY{p}{,} \PY{n}{ax3}\PY{p}{]} \PY{o}{=} \PY{n}{plt}\PY{o}{.}\PY{n}{subplots}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{3}\PY{p}{)}
+          \PY{n}{sns}\PY{o}{.}\PY{n}{boxplot}\PY{p}{(}\PY{n}{log}\PY{o}{.}\PY{n}{resid}\PY{p}{,} \PY{n}{ax}\PY{o}{=}\PY{n}{ax1}\PY{p}{)}
+          \PY{n}{sm}\PY{o}{.}\PY{n}{qqplot}\PY{p}{(}\PY{n}{log}\PY{o}{.}\PY{n}{resid}\PY{p}{,} \PY{n}{line}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{45}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{fit}\PY{o}{=}\PY{k+kc}{True}\PY{p}{,} \PY{n}{ax}\PY{o}{=}\PY{n}{ax2}\PY{p}{)}\PY{p}{;}
+          \PY{n}{sns}\PY{o}{.}\PY{n}{distplot}\PY{p}{(}\PY{n}{log}\PY{o}{.}\PY{n}{resid}\PY{p}{,} \PY{n}{ax}\PY{o}{=}\PY{n}{ax3}\PY{p}{)}
+\end{Verbatim}
+
+            \begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}116}]:} <matplotlib.axes.\_subplots.AxesSubplot at 0x121c9b7f0>
+\end{Verbatim}
+        
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{Homework 2_files/Homework 2_56_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}117}]:} \PY{n+nb}{print}\PY{p}{(}\PY{n}{log}\PY{o}{.}\PY{n}{summary}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+                            OLS Regression Results                            
+==============================================================================
+Dep. Variable:                    mpg   R-squared:                       0.837
+Model:                            OLS   Adj. R-squared:                  0.834
+Method:                 Least Squares   F-statistic:                     281.6
+Date:                Fri, 29 Sep 2017   Prob (F-statistic):          5.80e-147
+Time:                        11:25:56   Log-Likelihood:                -1005.7
+No. Observations:                 392   AIC:                             2027.
+Df Residuals:                     384   BIC:                             2059.
+Df Model:                           7                                         
+Covariance Type:            nonrobust                                         
+======================================================================================
+                         coef    std err          t      P>|t|      [0.025      0.975]
+--------------------------------------------------------------------------------------
+Intercept             27.2540      8.590      3.173      0.002      10.365      44.143
+cylinders             -0.4862      0.307     -1.585      0.114      -1.089       0.117
+displacement           0.0195      0.007      2.830      0.005       0.006       0.033
+np.log(horsepower)    -9.5064      1.540     -6.175      0.000     -12.534      -6.479
+weight                -0.0043      0.001     -6.148      0.000      -0.006      -0.003
+acceleration          -0.2921      0.104     -2.814      0.005      -0.496      -0.088
+year                   0.7053      0.048     14.556      0.000       0.610       0.801
+origin                 1.4824      0.259      5.716      0.000       0.973       1.992
+==============================================================================
+Omnibus:                       29.129   Durbin-Watson:                   1.420
+Prob(Omnibus):                  0.000   Jarque-Bera (JB):               46.738
+Skew:                           0.501   Prob(JB):                     7.10e-11
+Kurtosis:                       4.362   Cond. No.                     1.68e+05
+==============================================================================
+
+Warnings:
+[1] Standard Errors assume that the covariance matrix of the errors is correctly specified.
+[2] The condition number is large, 1.68e+05. This might indicate that there are
+strong multicollinearity or other numerical problems.
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}118}]:} \PY{n}{resid} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{DataFrame}\PY{p}{(}\PY{n}{log}\PY{o}{.}\PY{n}{outlier\PYZus{}test}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}119}]:} \PY{n}{outlier} \PY{o}{=} \PY{n}{resid}\PY{p}{[}\PY{n}{resid}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{unadj\PYZus{}p}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{\PYZlt{}}\PY{l+m+mf}{0.05}\PY{p}{]}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}120}]:} \PY{n}{outlier}\PY{o}{.}\PY{n}{count}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+            \begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}120}]:} student\_resid    21
+          unadj\_p          21
+          bonf(p)          21
+          dtype: int64
+\end{Verbatim}
+        
+    Log improves the shape of the distplot, but does not minimize the number
+of outliers. Log acually increased the number of outliers in the
+residual by 3. Unfortunatly, I have not been able to find anything that
+accurately reduces residuals into a normal distribution. I think that
+there are several large outliers on many fronts that cause this, instead
+of one feature in all cars. For example a Tesla (Which is not in the
+set) would cause a huge outlier due to its features. The residual on
+that car would be substantial and I could not fix it with a
+transformation.
+
+    \subsubsection{What Effect Do the ouliers
+cause?}\label{what-effect-do-the-ouliers-cause}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}121}]:} \PY{n}{df}\PY{o}{.}\PY{n}{columns}
+\end{Verbatim}
+
+            \begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}121}]:} Index(['mpg', 'cylinders', 'displacement', 'horsepower', 'weight',
+                 'acceleration', 'year', 'origin', 'name'],
+                dtype='object')
+\end{Verbatim}
+        
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}122}]:} \PY{n}{df}\PY{o}{.}\PY{n}{iloc}\PY{p}{[}\PY{n}{outlier}\PY{o}{.}\PY{n}{index}\PY{p}{]}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{name}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+\end{Verbatim}
+
+            \begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}122}]:} 53                           datsun 1200
+          110                            maxda rx3
+          152                      mercury monarch
+          153                        ford maverick
+          164                      ford mustang ii
+          242      volkswagen rabbit custom diesel
+          245                       datsun b210 gx
+          268            toyota celica gt liftback
+          307                            vw rabbit
+          318                 datsun 510 hatchback
+          320                            mazda glc
+          322                           datsun 210
+          323                 vw rabbit c (diesel)
+          324                   vw dasher (diesel)
+          325                  audi 5000s (diesel)
+          327                  honda civic 1500 gl
+          330                        datsun 280-zx
+          331                        mazda rx-7 gs
+          361               chrysler lebaron salon
+          381    oldsmobile cutlass ciera (diesel)
+          388                            vw pickup
+          Name: name, dtype: object
+\end{Verbatim}
+        
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}123}]:} \PY{n}{df}\PY{o}{.}\PY{n}{iloc}\PY{p}{[}\PY{n}{outlier}\PY{o}{.}\PY{n}{index}\PY{p}{]}\PY{o}{.}\PY{n}{describe}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+            \begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}123}]:}              mpg  cylinders  displacement  horsepower       weight  \textbackslash{}
+          count  21.000000  21.000000     21.000000   21.000000    21.000000   
+          mean   32.866667   4.619048    135.952381   77.476190  2477.333333   
+          std    11.719571   1.244033     74.409325   23.344419   542.422652   
+          min    13.000000   3.000000     70.000000   48.000000  1613.000000   
+          25\%    21.100000   4.000000     86.000000   65.000000  2110.000000   
+          50\%    37.000000   4.000000     97.000000   72.000000  2335.000000   
+          75\%    43.100000   6.000000    168.000000   90.000000  2950.000000   
+          max    46.600000   8.000000    302.000000  132.000000  3465.000000   
+          
+                 acceleration       year     origin  
+          count     21.000000  21.000000  21.000000  
+          mean      17.471429  78.476190   2.238095  
+          std        3.831337   2.976895   0.830949  
+          min       11.400000  71.000000   1.000000  
+          25\%       14.700000  78.000000   2.000000  
+          50\%       17.900000  80.000000   2.000000  
+          75\%       19.900000  80.000000   3.000000  
+          max       24.600000  82.000000   3.000000  
+\end{Verbatim}
+        
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}124}]:} \PY{n}{df}\PY{p}{[}\PY{o}{\PYZti{}}\PY{n}{df}\PY{o}{.}\PY{n}{isin}\PY{p}{(}\PY{n}{outlier}\PY{p}{)}\PY{p}{]}\PY{o}{.}\PY{n}{describe}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+            \begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}124}]:}               mpg   cylinders  displacement  horsepower       weight  \textbackslash{}
+          count  392.000000  392.000000    392.000000  392.000000   392.000000   
+          mean    23.445918    5.471939    194.411990  104.469388  2977.584184   
+          std      7.805007    1.705783    104.644004   38.491160   849.402560   
+          min      9.000000    3.000000     68.000000   46.000000  1613.000000   
+          25\%     17.000000    4.000000    105.000000   75.000000  2225.250000   
+          50\%     22.750000    4.000000    151.000000   93.500000  2803.500000   
+          75\%     29.000000    8.000000    275.750000  126.000000  3614.750000   
+          max     46.600000    8.000000    455.000000  230.000000  5140.000000   
+          
+                 acceleration        year      origin  
+          count    392.000000  392.000000  392.000000  
+          mean      15.541327   75.979592    1.576531  
+          std        2.758864    3.683737    0.805518  
+          min        8.000000   70.000000    1.000000  
+          25\%       13.775000   73.000000    1.000000  
+          50\%       15.500000   76.000000    1.000000  
+          75\%       17.025000   79.000000    2.000000  
+          max       24.800000   82.000000    3.000000  
+\end{Verbatim}
+        
+    This result is truely surprising. The outliers acutally have a much
+better fuel efficiency than the rest of the cars - almost 40\% more.
+This tells me that the outliers are the cars that we should all be
+driving. The majority of them are foreign made, and more environmentally
+concious. The accelerations, displacement, and horsepower is lower in
+the rest of the cars in comparison to outliers. This indicates that
+these cars are meant for fuel efficiency. Surprisingly, this is not the
+case. Instead, the outliers are mostly diesel cars; diesel has higher
+energy density than gasoline, which results in less fuel being burned to
+go the same distance. To accurately run regressions, I would want to
+control for fuel type; therfore, I will create a new column to control
+for gas type. 1 = diesel, 0 = gas
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}125}]:} \PY{n}{df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{fuel}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{n}{df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{name}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{apply}\PY{p}{(}\PY{k}{lambda} \PY{n}{x} \PY{p}{:} \PY{n+nb}{int}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{diesel}\PY{l+s+s1}{\PYZsq{}} \PY{o+ow}{in} \PY{n}{x}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}127}]:} \PY{n}{gas} \PY{o}{=} \PY{n}{smf}\PY{o}{.}\PY{n}{ols}\PY{p}{(}\PY{n}{formula}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{mpg \PYZti{} cylinders + displacement + horsepower}\PY{l+s+s1}{\PYZsq{}} \PY{o}{+} 
+                        \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{+ weight + acceleration + year + origin+fuel}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} 
+                       \PY{n}{data}\PY{o}{=}\PY{n}{df}\PY{p}{)}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{p}{)}
+          \PY{n+nb}{print}\PY{p}{(}\PY{n}{gas}\PY{o}{.}\PY{n}{summary}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+                            OLS Regression Results                            
+==============================================================================
+Dep. Variable:                    mpg   R-squared:                       0.845
+Model:                            OLS   Adj. R-squared:                  0.841
+Method:                 Least Squares   F-statistic:                     260.5
+Date:                Fri, 29 Sep 2017   Prob (F-statistic):          8.93e-150
+Time:                        11:26:06   Log-Likelihood:                -996.11
+No. Observations:                 392   AIC:                             2010.
+Df Residuals:                     383   BIC:                             2046.
+Df Model:                           8                                         
+Covariance Type:            nonrobust                                         
+================================================================================
+                   coef    std err          t      P>|t|      [0.025      0.975]
+--------------------------------------------------------------------------------
+Intercept      -11.8865      4.394     -2.705      0.007     -20.525      -3.248
+cylinders       -0.5577      0.302     -1.847      0.066      -1.151       0.036
+displacement     0.0183      0.007      2.607      0.009       0.005       0.032
+horsepower      -0.0151      0.013     -1.171      0.242      -0.040       0.010
+weight          -0.0065      0.001    -10.599      0.000      -0.008      -0.005
+acceleration    -0.0397      0.094     -0.424      0.672      -0.224       0.144
+year             0.7104      0.048     14.833      0.000       0.616       0.805
+origin           1.3239      0.260      5.091      0.000       0.813       1.835
+fuel             9.3625      1.236      7.575      0.000       6.932      11.793
+==============================================================================
+Omnibus:                       18.032   Durbin-Watson:                   1.354
+Prob(Omnibus):                  0.000   Jarque-Bera (JB):               33.944
+Skew:                           0.260   Prob(JB):                     4.26e-08
+Kurtosis:                       4.344   Cond. No.                     8.71e+04
+==============================================================================
+
+Warnings:
+[1] Standard Errors assume that the covariance matrix of the errors is correctly specified.
+[2] The condition number is large, 8.71e+04. This might indicate that there are
+strong multicollinearity or other numerical problems.
+
+    \end{Verbatim}
+
+    My thesis was correct. MPG is highly dependent on fuel type.
+Transforming this column:
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}131}]:} \PY{n}{fuel} \PY{o}{=} \PY{n}{smf}\PY{o}{.}\PY{n}{ols}\PY{p}{(}\PY{n}{formula}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{mpg \PYZti{} cylinders + displacement + np.sqrt(horsepower)}\PY{l+s+s1}{\PYZsq{}}\PY{o}{+} 
+                         \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{+ weight + acceleration + year + origin + np.sqrt(fuel)}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} 
+                       \PY{n}{data}\PY{o}{=}\PY{n}{df}\PY{p}{)}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{p}{)}
+          \PY{n}{fig}\PY{p}{,} \PY{p}{[}\PY{n}{ax1}\PY{p}{,} \PY{n}{ax2}\PY{p}{,} \PY{n}{ax3}\PY{p}{]} \PY{o}{=} \PY{n}{plt}\PY{o}{.}\PY{n}{subplots}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{3}\PY{p}{)}
+          \PY{n}{sns}\PY{o}{.}\PY{n}{boxplot}\PY{p}{(}\PY{n}{fuel}\PY{o}{.}\PY{n}{resid}\PY{p}{,} \PY{n}{ax}\PY{o}{=}\PY{n}{ax1}\PY{p}{)}
+          \PY{n}{sm}\PY{o}{.}\PY{n}{qqplot}\PY{p}{(}\PY{n}{fuel}\PY{o}{.}\PY{n}{resid}\PY{p}{,} \PY{n}{line}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{45}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{fit}\PY{o}{=}\PY{k+kc}{True}\PY{p}{,} \PY{n}{ax}\PY{o}{=}\PY{n}{ax2}\PY{p}{)}\PY{p}{;}
+          \PY{n}{sns}\PY{o}{.}\PY{n}{distplot}\PY{p}{(}\PY{n}{fuel}\PY{o}{.}\PY{n}{resid}\PY{p}{,} \PY{n}{ax}\PY{o}{=}\PY{n}{ax3}\PY{p}{)}
+\end{Verbatim}
+
+            \begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}131}]:} <matplotlib.axes.\_subplots.AxesSubplot at 0x1220b2c50>
+\end{Verbatim}
+        
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{Homework 2_files/Homework 2_71_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}132}]:} \PY{n}{resid} \PY{o}{=} \PY{n}{fuel}\PY{o}{.}\PY{n}{outlier\PYZus{}test}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}133}]:} \PY{n}{resid}\PY{p}{[}\PY{n}{resid}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{unadj\PYZus{}p}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{\PYZlt{}}\PY{l+m+mf}{0.05}\PY{p}{]}\PY{o}{.}\PY{n}{count}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+            \begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}133}]:} student\_resid    17
+          unadj\_p          17
+          bonf(p)          17
+          dtype: int64
+\end{Verbatim}
+        
+    It appears that fuel type is generating some of the outliers. By
+controlling for this, I was able to decrease the number of outliers by 4
+from log transformation and 1 from the control regression. This distplot
+appears to have a softer tail on the right side, which indicates that
+the controlling for fuel is critical for normalizing outlisers.
+Ultimately, I don't believe that transformations of the initial
+variables are the best way to normalize residuals. I believe that there
+are other confounding characteristics that cause these non-normal
+residual plots such as fuel type (possibly hybrids, electric as well).
 
     \begin{Verbatim}[commandchars=\\\{\}]
 {\color{incolor}In [{\color{incolor} }]:} 
